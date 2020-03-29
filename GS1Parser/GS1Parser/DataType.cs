@@ -3,6 +3,7 @@
     public enum DataType
     {
         Numeric,
-        Alphanumeric
+        Alphanumeric,
+        Date
     }
 }

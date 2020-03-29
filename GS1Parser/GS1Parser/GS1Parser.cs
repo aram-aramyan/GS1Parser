@@ -26,8 +26,7 @@ namespace GS1Parser
         /// <param name="hasCheckSum">Need to cut off the check sum</param>
         /// <param name="throwException">If an exception will be thrown if an AI cannot be found</param>
         /// <returns>The different parts of the ean128 code</returns>
-        public static Dictionary<Entity, string> Parse(string data, bool hasCheckSum = true,
-            bool throwException = false)
+        public static Dictionary<string, string> Parse(string data, bool hasCheckSum = true, bool throwException = false)
         {
             // cut off the EAN128 start code 
             if (data.StartsWith(EAN128StartCode))
@@ -36,7 +35,7 @@ namespace GS1Parser
             if (hasCheckSum)
                 data = data.Substring(0, data.Length - 2);
 
-            var result = new Dictionary<Entity, string>();
+            var result = new Dictionary<string, string>();
             var index = 0;
             // walkk through the EAN128 code
             while (index < data.Length)
@@ -52,7 +51,7 @@ namespace GS1Parser
 
                 // get the data to the current AI
                 var code = GetCode(data, ai, ref index);
-                result[ai] = code;
+                result[ai.AI] = code;
             }
 
             return result;
